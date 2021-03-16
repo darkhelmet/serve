@@ -1,7 +1,7 @@
 .PHONY: build push
 
 tag := $(shell git rev-parse --short HEAD)
-repo := darkhelmet/serve
+repo := darkhelmetlive/serve
 
 serve: *.go
 	go build -x serve.go logger.go

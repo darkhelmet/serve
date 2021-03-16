@@ -1,5 +1,9 @@
+FROM golang:1.16-alpine as builder
+RUN apk update && apk add --no-cache git ca-certificates && update-ca-certificates
+RUN go get github.com/darkhelmet/serve
+
 FROM alpine
-MAINTAINER Daniel Huckstep <darkhelmet@darkhelmetlive.com>
+LABEL maintainer="daniel@huckstep.ca"
 
 ADD serve /bin/
 

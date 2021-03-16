@@ -29,7 +29,7 @@ func main() {
 	if prefix != "" {
 		handler = http.StripPrefix(prefix, handler)
 	}
-	handler = LoggerHandler{handler, logger}
+	handler = KeyLoggerHandler{handler, logger}
 	err := http.ListenAndServe(spec, handler)
 	if err != nil {
 		log.Fatalf("failed serving: %s", err)

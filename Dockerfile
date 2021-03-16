@@ -1,11 +1,13 @@
 FROM golang:1.16-alpine as builder
 RUN apk update && apk add --no-cache git ca-certificates && update-ca-certificates
-RUN go get github.com/darkhelmet/serve
+WORKDIR /build
+COPY . /build
+RUN go build -x -o serve *.go
 
 FROM alpine
 LABEL maintainer="daniel@huckstep.ca"
 
-ADD serve /bin/
+COPY --from=builder /build/serve /bin/serve
 
 RUN mkdir /html
 WORKDIR /html
